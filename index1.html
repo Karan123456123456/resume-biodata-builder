@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Free Resume & Marriage Biodata Maker | ATS Friendly Resume Builder</title>
+    <meta name="description" content="Create ATS-friendly Tech Resumes, Foreign CVs, Traditional Indian CVs, and Marriage Biodatas for free. Choose from multiple templates and download instantly.">
+    <meta name="keywords" content="Resume Maker, ATS Resume Builder, Marriage Biodata Maker, Free CV Builder, Indian CV Format, Tech Resume Builder">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Your Name">
+
+    <!-- Open Graph Tags (Social Media Sharing) -->
+    <meta property="og:title" content="Free Resume & Marriage Biodata Maker">
+    <meta property="og:description" content="Build professional ATS resumes and attractive Marriage Biodatas online in minutes.">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS & html2pdf Library -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+
+    <!-- Header / Navbar -->
+    <header class="bg-blue-600 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">ProMaker <span class="text-xs bg-yellow-400 text-black px-2 py-1 rounded">Free</span></h1>
+            <p class="text-sm">Build Resumes & Biodata Online</p>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container mx-auto my-6 p-4">
+
+        <!-- Category Selection (Step 1) -->
+        <section class="mb-8 text-center">
+            <h2 class="text-xl font-bold mb-4">Choose Category / श्रेणी चुनें</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="selectCategory('indian')" class="cat-btn bg-white p-4 rounded-lg shadow hover:border-blue-500 border-2 transition">
+                    📌 Indian CV <br><span class="text-xs text-gray-500">(Full Details + Photo)</span>
+                </button>
+                <button onclick="selectCategory('tech')" class="cat-btn bg-white p-4 rounded-lg shadow hover:border-blue-500 border-2 transition">
+                    💻 Tech Company <br><span class="text-xs text-green-600 font-semibold">(ATS Friendly)</span>
+                </button>
+                <button onclick="selectCategory('foreign')" class="cat-btn bg-white p-4 rounded-lg shadow hover:border-blue-500 border-2 transition">
+                    🌍 Foreign Jobs <br><span class="text-xs text-green-600 font-semibold">(ATS Friendly)</span>
+                </button>
+                <button onclick="selectCategory('marriage')" class="cat-btn bg-white p-4 rounded-lg shadow hover:border-blue-500 border-2 transition">
+                    💍 Marriage Biodata <br><span class="text-xs text-pink-500">(Custom Design)</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Builder Workspace (Form + Preview) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- Form Controls (Left Side) -->
+            <section class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-lg font-bold mb-4 text-blue-600" id="form-title">Enter Details</h3>
+
+                <!-- Color Palette Picker -->
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2">Theme Color:</label>
+                    <div class="flex gap-2">
+                        <button onclick="changeColor('#1e40af')" class="w-8 h-8 rounded-full bg-blue-800"></button>
+                        <button onclick="changeColor('#065f46')" class="w-8 h-8 rounded-full bg-emerald-800"></button>
+                        <button onclick="changeColor('#991b1b')" class="w-8 h-8 rounded-full bg-red-800"></button>
+                        <button onclick="changeColor('#374151')" class="w-8 h-8 rounded-full bg-gray-700"></button>
+                    </div>
+                </div>
+
+                <!-- Form Fields -->
+                <form id="cv-form" class="space-y-4">
+                    <!-- Photo Upload (Dynamic) -->
+                    <div id="photo-group" class="hidden">
+                        <label class="block text-sm font-semibold">Upload Photo:</label>
+                        <input type="file" id="user-photo" accept="image/*" onchange="previewImage(event)" class="w-full text-sm">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold">Full Name:</label>
+                        <input type="text" id="name" oninput="updatePreview()" placeholder="Rahul Sharma" class="w-full p-2 border rounded">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold">Email & Phone:</label>
+                        <input type="text" id="contact" oninput="updatePreview()" placeholder="rahul@email.com | +91 9876543210" class="w-full p-2 border rounded">
+                    </div>
+
+                    <!-- Extra Personal Fields (For Indian CV & Marriage) -->
+                    <div id="personal-fields" class="space-y-4 hidden">
+                        <div>
+                            <label class="block text-sm font-semibold">Date of Birth:</label>
+                            <input type="text" id="dob" oninput="updatePreview()" placeholder="15 August 1995" class="w-full p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold">Father's Name:</label>
+                            <input type="text" id="father" oninput="updatePreview()" placeholder="Shri Sharma" class="w-full p-2 border rounded">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold">Education / Qualifications:</label>
+                        <textarea id="education" oninput="updatePreview()" rows="2" placeholder="B.Tech Computer Science, ABC University" class="w-full p-2 border rounded"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold">Work Experience / Details:</label>
+                        <textarea id="experience" oninput="updatePreview()" rows="3" placeholder="Software Engineer at XYZ Company..." class="w-full p-2 border rounded"></textarea>
+                    </div>
+                </form>
+
+                <button onclick="downloadPDF()" class="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow">
+                    📥 Download PDF
+                </button>
+            </section>
+
+            <!-- Live Preview Area (Right Side) -->
+            <section class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-lg font-bold mb-4 text-gray-700">Live Preview</h3>
+                <div id="preview-container" class="border p-6 min-h-[500px] bg-white">
+                    <div id="preview-header" class="border-b-2 pb-4 mb-4">
+                        <img id="preview-img" class="w-24 h-24 rounded-full float-right hidden object-cover" alt="Profile">
+                        <h2 id="p-name" class="text-2xl font-bold" style="color: #1e40af;">Your Name</h2>
+                        <p id="p-contact" class="text-sm text-gray-600">Email & Contact Details</p>
+                    </div>
+
+                    <div id="p-extra" class="mb-4 text-sm hidden">
+                        <p><strong>DOB:</strong> <span id="p-dob">-</span></p>
+                        <p><strong>Father's Name:</strong> <span id="p-father">-</span></p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-bold border-b text-sm uppercase mb-1">Education</h4>
+                        <p id="p-education" class="text-sm whitespace-pre-line">Education details will appear here...</p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold border-b text-sm uppercase mb-1">Experience / Details</h4>
+                        <p id="p-experience" class="text-sm whitespace-pre-line">Experience or Biodata details will appear here...</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
