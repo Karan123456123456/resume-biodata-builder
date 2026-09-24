@@ -1,89 +1,99 @@
+// Current category state
 let currentCategory = 'indian';
-let themeColor = '#1e40af';
 
-function selectCategory(cat) {
-    currentCategory = cat;
+// Category Switcher
+function selectCategory(category) {
+    currentCategory = category;
 
-    // Toggle Button Styles
-    document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active', 'border-blue-600'));
-    document.getElementById(`btn-${cat}`).classList.add('active', 'border-blue-600');
+    // Reset active button styling
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('border-blue-600', 'active');
+        btn.classList.add('border-transparent');
+    });
 
-    // Display Groups Logic
-    const groupPhoto = document.getElementById('group-photo');
-    const groupPersonal = document.getElementById('group-personal');
-    const groupMarriage = document.getElementById('group-marriage');
-    const groupDeclaration = document.getElementById('group-declaration');
+    const activeBtn = document.getElementById(`btn-${category}`);
+    if (activeBtn) {
+        activeBtn.classList.add('border-blue-600', 'active');
+    }
 
-    const pSecPersonal = document.getElementById('p-sec-personal');
-    const pSecMarriage = document.getElementById('p-sec-marriage');
-    const pSecDeclaration = document.getElementById('p-sec-declaration');
-    const pPhoto = document.getElementById('p-photo');
+    // Toggle Form Groups & Preview Sections based on Category
+    const isMarriage = category === 'marriage';
+    const isForeign = category === 'foreign';
+    const isTech = category === 'tech';
 
-    if (cat === 'indian') {
-        groupPhoto.style.display = 'block';
-        groupPersonal.style.display = 'block';
-        groupMarriage.style.display = 'none';
-        groupDeclaration.style.display = 'block';
+    // Form inputs toggle
+    document.getElementById('group-photo').style.display = isForeign ? 'none' : 'block';
+    document.getElementById('group-personal').style.display = isMarriage ? 'none' : 'block';
+    document.getElementById('group-marriage').classList.toggle('hidden', !isMarriage);
+    document.getElementById('group-declaration').style.display = isMarriage ? 'none' : 'block';
 
-        pSecPersonal.style.display = 'block';
-        pSecMarriage.style.display = 'none';
-        pSecDeclaration.style.display = 'block';
-    } else if (cat === 'tech' || cat === 'foreign') {
-        // Hide photos and personal details for ATS
-        groupPhoto.style.display = 'none';
-        groupPersonal.style.display = 'none';
-        groupMarriage.style.display = 'none';
-        groupDeclaration.style.display = 'none';
+    // Preview sections toggle
+    document.getElementById('p-photo').classList.toggle('hidden', isForeign);
+    document.getElementById('p-sec-personal').classList.toggle('hidden', isMarriage);
+    document.getElementById('p-sec-marriage').classList.toggle('hidden', !isMarriage);
+    document.getElementById('p-sec-declaration').classList.toggle('hidden', isMarriage);
 
-        pSecPersonal.style.display = 'none';
-        pSecMarriage.style.display = 'none';
-        pSecDeclaration.style.display = 'none';
-        pPhoto.classList.add('hidden');
-    } else if (cat === 'marriage') {
-        groupPhoto.style.display = 'block';
-        groupPersonal.style.display = 'block';
-        groupMarriage.style.display = 'block';
-        groupDeclaration.style.display = 'none';
-
-        pSecPersonal.style.display = 'block';
-        pSecMarriage.style.display = 'block';
-        pSecDeclaration.style.display = 'none';
+    // Dynamic Header Title for Marriage Biodata
+    if (isMarriage) {
+        document.getElementById('p-job-title').style.display = 'none';
+    } else {
+        document.getElementById('p-job-title').style.display = 'block';
     }
 
     updatePreview();
 }
 
+// Live Preview Update Function
 function updatePreview() {
-    const name = document.getElementById('name').value || 'KARAN KASHYAP';
+    const name = document.getElementById('name').value.trim() || 'YOUR FULL NAME';
     document.getElementById('p-name').innerText = name;
     document.getElementById('p-sign-name').innerText = name;
-    document.getElementById('p-job-title').innerText = document.getElementById('job-title').value || 'Mechanic Motor Vehicle / Automobile Technician';
-    
-    const phone = document.getElementById('phone').value || '8115540448';
-    const email = document.getElementById('email').value || 'karankashyap7246@gmail.com';
-    const address = document.getElementById('address').value || 'Lucknow Uttar Pradesh';
+
+    const jobTitle = document.getElementById('job-title').value.trim() || 'Your Job Title / Professional Designation';
+    document.getElementById('p-job-title').innerText = jobTitle;
+
+    const phone = document.getElementById('phone').value.trim() || '+91 0000000000';
+    const email = document.getElementById('email').value.trim() || 'your.email@example.com';
+    const address = document.getElementById('address').value.trim() || 'City, State, Country';
     document.getElementById('p-contact').innerHTML = `Mobile: ${phone} | ${email}<br>Address: ${address}`;
 
-    document.getElementById('p-objective').innerText = document.getElementById('objective').value || 'Skilled and certified ITI Mechanic Motor Vehicle with experience...';
-    document.getElementById('p-experience').innerText = document.getElementById('experience').value || 'Maruti Suzuki India Limited...';
-    document.getElementById('p-education').innerText = document.getElementById('education').value || 'Bachelor of Arts | CSJM University | 2023 | 77.67%';
-    document.getElementById('p-certifications').innerText = document.getElementById('certifications').value || 'National Apprenticeship Certificate - MMV, DGT 2023';
-    document.getElementById('p-skills').innerText = document.getElementById('skills').value || 'Technical: Vehicle Assembly, Engine Maintenance';
+    // Objective / Summary
+    const objText = document.getElementById('objective').value.trim() || 'Your career objective or professional summary will appear here once you fill out the form...';
+    document.getElementById('p-objective').innerText = objText;
 
-    // Personal & Marriage Updates
-    document.getElementById('p-dob').innerText = document.getElementById('dob').value || '17 - Oct - 2002';
-    document.getElementById('p-father').innerText = document.getElementById('father').value || 'Mr Ramesh Kashyap';
-    document.getElementById('p-language').innerText = document.getElementById('language').value || 'Hindi, English';
-    document.getElementById('p-marital').innerText = document.getElementById('marital').value || 'Unmarried';
+    // Experience
+    const expText = document.getElementById('experience').value.trim() || 'Company Name & Location\nYour Role / Position (Dates)\n- Key responsibility or achievement details...';
+    document.getElementById('p-experience').innerText = expText;
 
-    document.getElementById('p-caste').innerText = document.getElementById('caste').value || '-';
-    document.getElementById('p-height').innerText = document.getElementById('height').value || '-';
-    document.getElementById('p-family').innerText = document.getElementById('family').value || '-';
+    // Education
+    const eduText = document.getElementById('education').value.trim() || 'Degree Name | Institute / Board | Year | Percentage/Grade';
+    document.getElementById('p-education').innerText = eduText;
 
-    document.getElementById('p-place').innerText = document.getElementById('place').value || 'Lucknow';
-    document.getElementById('p-date').innerText = document.getElementById('date').value || '__/__/____';
+    // Certifications
+    const certText = document.getElementById('certifications').value.trim() || 'Certification Name - Issuing Authority (Year)';
+    document.getElementById('p-certifications').innerText = certText;
+
+    // Skills
+    const skillsText = document.getElementById('skills').value.trim() || 'Technical & Professional skills list...';
+    document.getElementById('p-skills').innerText = skillsText;
+
+    // Personal Details
+    document.getElementById('p-dob').innerText = document.getElementById('dob').value.trim() || 'DD/MM/YYYY';
+    document.getElementById('p-father').innerText = document.getElementById('father').value.trim() || "Father's Name";
+    document.getElementById('p-language').innerText = document.getElementById('language').value.trim() || 'Languages Known';
+    document.getElementById('p-marital').innerText = document.getElementById('marital').value.trim() || 'Status';
+
+    // Marriage Details
+    document.getElementById('p-caste').innerText = document.getElementById('caste').value.trim() || '-';
+    document.getElementById('p-height').innerText = document.getElementById('height').value.trim() || '-';
+    document.getElementById('p-family').innerText = document.getElementById('family').value.trim() || '-';
+
+    // Declaration
+    document.getElementById('p-place').innerText = document.getElementById('place').value.trim() || 'Your City';
+    document.getElementById('p-date').innerText = document.getElementById('date').value.trim() || '__/__/____';
 }
 
+// Image Preview Handler
 function previewImage(event) {
     const reader = new FileReader();
     reader.onload = function() {
@@ -96,26 +106,36 @@ function previewImage(event) {
     }
 }
 
-function changeColor(color) {
-    themeColor = color;
-    document.getElementById('p-name').style.color = color;
-    document.querySelectorAll('.section-title').forEach(el => {
-        el.style.color = color;
-        el.style.borderColor = color;
+// Template Switcher
+function changeTemplate(templateClass) {
+    const container = document.getElementById('preview-container');
+    container.className = `${templateClass} bg-white p-8 shadow-lg w-[595px] min-h-[842px] text-xs leading-relaxed text-gray-800`;
+}
+
+// Color Theme Switcher
+function changeColor(colorCode) {
+    const title = document.getElementById('p-name');
+    if (title) {
+        title.style.color = colorCode;
+    }
+    const sectionTitles = document.querySelectorAll('.section-title');
+    sectionTitles.forEach(el => {
+        el.style.borderBottom = `2px solid ${colorCode}`;
+        el.style.color = colorCode;
+        el.style.fontWeight = 'bold';
+        el.style.marginBottom = '6px';
+        el.style.marginTop = '10px';
     });
 }
 
-function changeTemplate(temp) {
-    const container = document.getElementById('preview-container');
-    container.className = `${temp} bg-white p-8 shadow-lg w-[595px] min-h-[842px] text-xs leading-relaxed text-gray-800`;
-    changeColor(themeColor);
-}
-
+// PDF Download Handler
 function downloadPDF() {
     const element = document.getElementById('preview-container');
+    const userName = document.getElementById('name').value.trim() || 'Resume';
+    
     const opt = {
-        margin:       0.2,
-        filename:     'Resume_Document.pdf',
+        margin:       0.3,
+        filename:     `${userName.replace(/\s+/g, '_')}_Document.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2 },
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
