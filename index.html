@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProMaker - Free Resume & Marriage Biodata Maker</title>
-    <meta name="description" content="Create ATS-friendly Tech Resumes, Foreign CVs, Traditional Indian CVs, and Marriage Biodatas for free.">
     
+    <!-- Primary SEO Meta Tags -->
+    <title>Free Online Resume & Marriage Biodata Maker | ProMaker</title>
+    <meta name="title" content="Free Online Resume & Marriage Biodata Maker | ProMaker">
+    <meta name="description" content="Create ATS-friendly Tech Resumes, Foreign CVs, Traditional Indian CVs, and Marriage Biodatas for free. Live preview, templates, and 1-click PDF download.">
+    <meta name="keywords" content="Resume Maker, ATS Resume Builder, Marriage Biodata Maker, Free CV Builder, Indian CV Format, Tech Resume Builder, ProMaker">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="ProMaker">
+    <link rel="canonical" href="https://karan123456123456.github.io/resume-biodata-builder/">
+
+    <!-- Open Graph / Facebook / WhatsApp SEO -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://karan123456123456.github.io/resume-biodata-builder/">
+    <meta property="og:title" content="Free Online Resume & Marriage Biodata Maker | ProMaker">
+    <meta property="og:description" content="Build professional ATS-friendly Resumes and attractive Marriage Biodatas online in minutes with live templates and instant PDF export.">
+    <meta property="og:image" content="https://karan123456123456.github.io/resume-biodata-builder/og-image.jpg">
+
+    <!-- Twitter SEO -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://karan123456123456.github.io/resume-biodata-builder/">
+    <meta property="twitter:title" content="Free Online Resume & Marriage Biodata Maker | ProMaker">
+    <meta property="twitter:description" content="Build professional ATS-friendly Resumes and attractive Marriage Biodatas online in minutes.">
+
+    <!-- Structured Data (JSON-LD Schema Markup for Google Search) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ProMaker - Resume & Biodata Builder",
+      "url": "https://karan123456123456.github.io/resume-biodata-builder/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "description": "Free tool to generate ATS-friendly resumes for Tech and Foreign jobs, Indian Standard CVs, and Marriage Biodatas."
+    }
+    </script>
+
+    <!-- Tailwind CSS & html2pdf Library -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="styles.css">
@@ -15,7 +54,7 @@
     <header class="bg-blue-700 text-white p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-2xl font-bold">ProMaker <span class="text-xs bg-yellow-400 text-black px-2 py-1 rounded font-normal">Free</span></h1>
-            <p class="text-sm">Build Resumes & Biodata Online</p>
+            <p class="text-sm">Free Online Resume & Biodata Generator</p>
         </div>
     </header>
 
@@ -43,7 +82,7 @@
         <!-- Template & Color Controls -->
         <section class="mb-6 bg-white p-4 rounded shadow flex flex-wrap gap-4 items-center justify-between">
             <div>
-                <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Select Template Style:</label>
+                <label for="template-select" class="block text-xs font-bold uppercase text-gray-600 mb-1">Select Template Style:</label>
                 <select id="template-select" onchange="changeTemplate(this.value)" class="p-2 border rounded text-sm bg-gray-50">
                     <option value="temp1">Template 1 - Classic Standard</option>
                     <option value="temp2">Template 2 - Modern Border Header</option>
@@ -52,94 +91,86 @@
             </div>
 
             <div>
-                <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Theme Color:</label>
+                <span class="block text-xs font-bold uppercase text-gray-600 mb-1">Theme Color:</span>
                 <div class="flex gap-2">
-                    <button onclick="changeColor('#1e40af')" class="w-7 h-7 rounded-full bg-blue-800 border-2 border-white shadow"></button>
-                    <button onclick="changeColor('#065f46')" class="w-7 h-7 rounded-full bg-emerald-800 border-2 border-white shadow"></button>
-                    <button onclick="changeColor('#991b1b')" class="w-7 h-7 rounded-full bg-red-800 border-2 border-white shadow"></button>
-                    <button onclick="changeColor('#374151')" class="w-7 h-7 rounded-full bg-gray-700 border-2 border-white shadow"></button>
-                    <button onclick="changeColor('#831843')" class="w-7 h-7 rounded-full bg-pink-900 border-2 border-white shadow"></button>
+                    <button aria-label="Blue Theme" onclick="changeColor('#1e40af')" class="w-7 h-7 rounded-full bg-blue-800 border-2 border-white shadow"></button>
+                    <button aria-label="Green Theme" onclick="changeColor('#065f46')" class="w-7 h-7 rounded-full bg-emerald-800 border-2 border-white shadow"></button>
+                    <button aria-label="Red Theme" onclick="changeColor('#991b1b')" class="w-7 h-7 rounded-full bg-red-800 border-2 border-white shadow"></button>
+                    <button aria-label="Gray Theme" onclick="changeColor('#374151')" class="w-7 h-7 rounded-full bg-gray-700 border-2 border-white shadow"></button>
+                    <button aria-label="Pink Theme" onclick="changeColor('#831843')" class="w-7 h-7 rounded-full bg-pink-900 border-2 border-white shadow"></button>
                 </div>
             </div>
         </section>
 
-        <!-- Workspace (Form + Preview) -->
+        <!-- Workspace -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
             <!-- Dynamic Input Form -->
             <section class="bg-white p-5 rounded shadow space-y-4 max-h-[800px] overflow-y-auto">
                 <h3 class="text-md font-bold text-blue-700 border-b pb-2">2. Enter Details</h3>
 
-                <!-- Photo Upload -->
                 <div id="group-photo">
-                    <label class="block text-xs font-semibold mb-1">Photo Upload:</label>
+                    <label for="user-photo" class="block text-xs font-semibold mb-1">Photo Upload:</label>
                     <input type="file" id="user-photo" accept="image/*" onchange="previewImage(event)" class="text-xs w-full">
                 </div>
 
-                <!-- Basic Info -->
                 <div class="grid grid-cols-2 gap-2">
                     <div>
-                        <label class="block text-xs font-semibold mb-1">Full Name:</label>
-                        <input type="text" id="name" oninput="updatePreview()" placeholder="KARAN KASHYAP" class="w-full p-2 border rounded text-sm">
+                        <label for="name" class="block text-xs font-semibold mb-1">Full Name:</label>
+                        <input type="text" id="name" oninput="updatePreview()" placeholder="e.g. Rahul Sharma" class="w-full p-2 border rounded text-sm">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold mb-1">Job Title / Designation:</label>
-                        <input type="text" id="job-title" oninput="updatePreview()" placeholder="Mechanic Motor Vehicle" class="w-full p-2 border rounded text-sm">
+                        <label for="job-title" class="block text-xs font-semibold mb-1">Job Title / Designation:</label>
+                        <input type="text" id="job-title" oninput="updatePreview()" placeholder="e.g. Software Engineer / Technician" class="w-full p-2 border rounded text-sm">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2">
                     <div>
-                        <label class="block text-xs font-semibold mb-1">Mobile No:</label>
-                        <input type="text" id="phone" oninput="updatePreview()" placeholder="8115540448" class="w-full p-2 border rounded text-sm">
+                        <label for="phone" class="block text-xs font-semibold mb-1">Mobile No:</label>
+                        <input type="text" id="phone" oninput="updatePreview()" placeholder="e.g. +91 9876543210" class="w-full p-2 border rounded text-sm">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold mb-1">Email ID:</label>
-                        <input type="text" id="email" oninput="updatePreview()" placeholder="karankashyap7246@gmail.com" class="w-full p-2 border rounded text-sm">
+                        <label for="email" class="block text-xs font-semibold mb-1">Email ID:</label>
+                        <input type="text" id="email" oninput="updatePreview()" placeholder="e.g. rahul.sharma@example.com" class="w-full p-2 border rounded text-sm">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold mb-1">Address / Location:</label>
-                    <input type="text" id="address" oninput="updatePreview()" placeholder="Lucknow, Uttar Pradesh" class="w-full p-2 border rounded text-sm">
+                    <label for="address" class="block text-xs font-semibold mb-1">Address / Location:</label>
+                    <input type="text" id="address" oninput="updatePreview()" placeholder="e.g. New Delhi, India" class="w-full p-2 border rounded text-sm">
                 </div>
 
-                <!-- Career Objective -->
                 <div id="group-objective">
-                    <label class="block text-xs font-semibold mb-1">Career Objective / Profile Summary:</label>
-                    <textarea id="objective" oninput="updatePreview()" rows="2" placeholder="Skilled and certified ITI Mechanic Motor Vehicle..." class="w-full p-2 border rounded text-sm"></textarea>
+                    <label for="objective" class="block text-xs font-semibold mb-1">Career Objective / Profile Summary:</label>
+                    <textarea id="objective" oninput="updatePreview()" rows="2" placeholder="Write a short summary about your professional goals..." class="w-full p-2 border rounded text-sm"></textarea>
                 </div>
 
-                <!-- Experience -->
                 <div id="group-experience">
-                    <label class="block text-xs font-semibold mb-1">Professional Experience:</label>
-                    <textarea id="experience" oninput="updatePreview()" rows="4" placeholder="Maruti Suzuki India Limited&#10;Temporary Workman (April 2025 - Nov 2025)&#10;- Assembly line operations..." class="w-full p-2 border rounded text-sm"></textarea>
+                    <label for="experience" class="block text-xs font-semibold mb-1">Professional Experience:</label>
+                    <textarea id="experience" oninput="updatePreview()" rows="4" placeholder="XYZ Company Ltd&#10;Software Technician (Jan 2024 - Present)&#10;- Managed daily technical operations and support..." class="w-full p-2 border rounded text-sm"></textarea>
                 </div>
 
-                <!-- Education Details -->
                 <div id="group-education">
-                    <label class="block text-xs font-semibold mb-1">Education (Separate line for each qualification):</label>
-                    <textarea id="education" oninput="updatePreview()" rows="3" placeholder="Bachelor of Arts | CSJM Univ | 2023 | 77.67%&#10;ITI (MMV) | Govt ITI Aliganj | 2020 | 88%" class="w-full p-2 border rounded text-sm"></textarea>
+                    <label for="education" class="block text-xs font-semibold mb-1">Education (Separate line for each qualification):</label>
+                    <textarea id="education" oninput="updatePreview()" rows="3" placeholder="B.Tech Computer Science | ABC University | 2023 | 80%&#10;Higher Secondary | CBSE Board | 2019 | 85%" class="w-full p-2 border rounded text-sm"></textarea>
                 </div>
 
-                <!-- Technical Certifications -->
                 <div id="group-certifications">
-                    <label class="block text-xs font-semibold mb-1">Technical Certifications / Courses:</label>
-                    <textarea id="certifications" oninput="updatePreview()" rows="3" placeholder="National Apprenticeship Certificate - MMV, DGT 2023&#10;ADCA Computer Course - Grade A+ 90%" class="w-full p-2 border rounded text-sm"></textarea>
+                    <label for="certifications" class="block text-xs font-semibold mb-1">Technical Certifications / Courses:</label>
+                    <textarea id="certifications" oninput="updatePreview()" rows="3" placeholder="Certified Web Developer - 2023&#10;Advance Diploma in Computer Applications..." class="w-full p-2 border rounded text-sm"></textarea>
                 </div>
 
-                <!-- Core Skills -->
                 <div id="group-skills">
-                    <label class="block text-xs font-semibold mb-1">Core Skills (Technical / IT / Soft Skills):</label>
-                    <textarea id="skills" oninput="updatePreview()" rows="2" placeholder="Technical: Vehicle Assembly, Engine Maintenance&#10;Computer: MS Word, Excel, Tally" class="w-full p-2 border rounded text-sm"></textarea>
+                    <label for="skills" class="block text-xs font-semibold mb-1">Core Skills (Technical / IT / Soft Skills):</label>
+                    <textarea id="skills" oninput="updatePreview()" rows="2" placeholder="Technical: System Assembly, Quality Inspection&#10;Software: MS Office, Basic Coding" class="w-full p-2 border rounded text-sm"></textarea>
                 </div>
 
-                <!-- Personal Info (Indian CV & Marriage) -->
                 <div id="group-personal" class="space-y-2 border-t pt-2">
                     <h4 class="text-xs font-bold text-gray-700 uppercase">Personal Details / Personal Info</h4>
                     <div class="grid grid-cols-2 gap-2">
-                        <input type="text" id="dob" oninput="updatePreview()" placeholder="DOB: 17-Oct-2002" class="p-2 border rounded text-sm">
-                        <input type="text" id="father" oninput="updatePreview()" placeholder="Father's Name: Mr Ramesh Kashyap" class="p-2 border rounded text-sm">
+                        <input type="text" id="dob" oninput="updatePreview()" placeholder="DOB: DD/MM/YYYY" class="p-2 border rounded text-sm">
+                        <input type="text" id="father" oninput="updatePreview()" placeholder="Father's Name: Mr. Person Name" class="p-2 border rounded text-sm">
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <input type="text" id="language" oninput="updatePreview()" placeholder="Languages: Hindi, English" class="p-2 border rounded text-sm">
@@ -147,20 +178,18 @@
                     </div>
                 </div>
 
-                <!-- Marriage Specific Fields -->
                 <div id="group-marriage" class="space-y-2 border-t pt-2 hidden">
                     <h4 class="text-xs font-bold text-pink-700 uppercase">Marriage / Family Details</h4>
                     <div class="grid grid-cols-2 gap-2">
-                        <input type="text" id="caste" oninput="updatePreview()" placeholder="Caste / Gotra: Kashyap" class="p-2 border rounded text-sm">
-                        <input type="text" id="height" oninput="updatePreview()" placeholder="Height: 5 ft 8 in" class="p-2 border rounded text-sm">
+                        <input type="text" id="caste" oninput="updatePreview()" placeholder="Caste / Gotra: Your Sub-caste" class="p-2 border rounded text-sm">
+                        <input type="text" id="height" oninput="updatePreview()" placeholder="Height: e.g. 5 ft 8 in" class="p-2 border rounded text-sm">
                     </div>
-                    <textarea id="family" oninput="updatePreview()" rows="2" placeholder="Family Info: Father (Service), 1 Brother..." class="w-full p-2 border rounded text-sm"></textarea>
+                    <textarea id="family" oninput="updatePreview()" rows="2" placeholder="Family Info: Father (Business), 1 Sister..." class="w-full p-2 border rounded text-sm"></textarea>
                 </div>
 
-                <!-- Declaration -->
                 <div id="group-declaration" class="space-y-2 border-t pt-2">
                     <div class="grid grid-cols-2 gap-2">
-                        <input type="text" id="place" oninput="updatePreview()" placeholder="Place: Lucknow" class="p-2 border rounded text-sm">
+                        <input type="text" id="place" oninput="updatePreview()" placeholder="Place: City Name" class="p-2 border rounded text-sm">
                         <input type="text" id="date" oninput="updatePreview()" placeholder="Date: DD/MM/YYYY" class="p-2 border rounded text-sm">
                     </div>
                 </div>
@@ -174,58 +203,50 @@
             <section class="bg-gray-200 p-4 rounded shadow flex justify-center items-start overflow-x-auto">
                 <div id="preview-container" class="preview-temp1 bg-white p-8 shadow-lg w-[595px] min-h-[842px] text-xs leading-relaxed text-gray-800">
                     
-                    <!-- Header -->
                     <div id="p-header" class="border-b-2 pb-3 mb-3 flex justify-between items-start">
                         <div>
-                            <h1 id="p-name" class="text-xl font-bold uppercase text-blue-800">KARAN KASHYAP</h1>
-                            <p id="p-job-title" class="font-semibold text-gray-600">Mechanic Motor Vehicle / Automobile Technician</p>
-                            <p id="p-contact" class="text-gray-600 mt-1">Mobile: 8115540448 | karankashyap7246@gmail.com<br>Address: Lucknow Uttar Pradesh</p>
+                            <h1 id="p-name" class="text-xl font-bold uppercase text-blue-800">YOUR FULL NAME</h1>
+                            <p id="p-job-title" class="font-semibold text-gray-600">Your Job Title / Professional Designation</p>
+                            <p id="p-contact" class="text-gray-600 mt-1">Mobile: +91 0000000000 | your.email@example.com<br>Address: City, State, Country</p>
                         </div>
-                        <img id="p-photo" class="w-20 h-24 object-cover border rounded hidden" alt="Photo">
+                        <img id="p-photo" class="w-20 h-24 object-cover border rounded hidden" alt="Profile Photo">
                     </div>
 
-                    <!-- Objective -->
                     <div id="p-sec-objective" class="mb-3">
                         <h2 class="section-title">CAREER OBJECTIVE</h2>
-                        <p id="p-objective">Skilled and certified ITI Mechanic Motor Vehicle with 3.5 year of hand on experience...</p>
+                        <p id="p-objective">Your career objective or professional summary will appear here once you fill out the form on the left...</p>
                     </div>
 
-                    <!-- Experience -->
                     <div id="p-sec-experience" class="mb-3">
                         <h2 class="section-title">PROFESSIONAL EXPERIENCE</h2>
-                        <p id="p-experience" class="whitespace-pre-line">Maruti Suzuki India Limited Manesar Gurgaon...</p>
+                        <p id="p-experience" class="whitespace-pre-line">Company Name & Location&#10;Your Role / Position (Dates)&#10;- Key responsibility or achievement details...</p>
                     </div>
 
-                    <!-- Education -->
                     <div id="p-sec-education" class="mb-3">
                         <h2 class="section-title">EDUCATION</h2>
-                        <p id="p-education" class="whitespace-pre-line">Bachelor of Arts | CSJM University | 2023 | 77.67%</p>
+                        <p id="p-education" class="whitespace-pre-line">Degree Name | Institute / Board | Year | Percentage/Grade</p>
                     </div>
 
-                    <!-- Certifications -->
                     <div id="p-sec-certifications" class="mb-3">
                         <h2 class="section-title">TECHNICAL CERTIFICATIONS</h2>
-                        <p id="p-certifications" class="whitespace-pre-line">National Apprenticeship Certificate- Mechanic Motor Vehicle...</p>
+                        <p id="p-certifications" class="whitespace-pre-line">Certification Name - Issuing Authority (Year)</p>
                     </div>
 
-                    <!-- Skills -->
                     <div id="p-sec-skills" class="mb-3">
                         <h2 class="section-title">CORE SKILLS</h2>
-                        <p id="p-skills" class="whitespace-pre-line">Technical: Vehicle Assembly, Engine Maintenance</p>
+                        <p id="p-skills" class="whitespace-pre-line">Technical & Professional skills list...</p>
                     </div>
 
-                    <!-- Personal Details -->
                     <div id="p-sec-personal" class="mb-3">
                         <h2 class="section-title">PERSONAL DETAILS</h2>
                         <div class="grid grid-cols-2 gap-1">
-                            <p><strong>Date of Birth:</strong> <span id="p-dob">17 - Oct - 2002</span></p>
-                            <p><strong>Father's Name:</strong> <span id="p-father">Mr Ramesh Kashyap</span></p>
-                            <p><strong>Language:</strong> <span id="p-language">Hindi, English</span></p>
-                            <p><strong>Marital Status:</strong> <span id="p-marital">Unmarried</span></p>
+                            <p><strong>Date of Birth:</strong> <span id="p-dob">DD/MM/YYYY</span></p>
+                            <p><strong>Father's Name:</strong> <span id="p-father">Father's Name</span></p>
+                            <p><strong>Language:</strong> <span id="p-language">Languages Known</span></p>
+                            <p><strong>Marital Status:</strong> <span id="p-marital">Status</span></p>
                         </div>
                     </div>
 
-                    <!-- Marriage Specific Details -->
                     <div id="p-sec-marriage" class="mb-3 hidden">
                         <h2 class="section-title">FAMILY & PERSONAL INFO</h2>
                         <div class="grid grid-cols-2 gap-1 mb-2">
@@ -235,15 +256,14 @@
                         <p><strong>Family Details:</strong> <span id="p-family">-</span></p>
                     </div>
 
-                    <!-- Declaration -->
                     <div id="p-sec-declaration" class="mt-6 pt-3 border-t">
                         <p class="italic text-[10px]">I hereby declare that the information furnished above is true to the best of my knowledge.</p>
                         <div class="flex justify-between items-end mt-4">
                             <div>
-                                <p>Place: <span id="p-place">Lucknow</span></p>
+                                <p>Place: <span id="p-place">Your City</span></p>
                                 <p>Date: <span id="p-date">__/__/____</span></p>
                             </div>
-                            <p class="font-bold uppercase" id="p-sign-name">KARAN KASHYAP</p>
+                            <p class="font-bold uppercase" id="p-sign-name">YOUR FULL NAME</p>
                         </div>
                     </div>
 
