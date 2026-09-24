@@ -1,11 +1,31 @@
-/* Printable Area Settings */
+/* Document A4 Size Simulation */
 #preview-container {
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    background-color: #ffffff;
+    width: 595px;
+    min-height: 842px;
+    box-sizing: border-box;
 }
 
-/* Category Selected State */
-.cat-btn.active {
-    border-color: #2563eb;
-    background-color: #eff6ff;
+/* Dynamic Section Title Styling */
+.section-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 11px;
+    border-bottom: 1px solid #1e40af;
+    color: #1e40af;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+}
+
+/* Template 2 Specific Styles */
+.preview-temp2 .section-title {
+    background-color: #f3f4f6;
+    padding: 3px 6px;
+    border-bottom: none;
+    border-left: 4px solid #1e40af;
+}
+
+/* Template 3 Specific Styles */
+.preview-temp3 .section-title {
+    border-bottom: 2px dashed #1e40af;
+    text-align: center;
 }
